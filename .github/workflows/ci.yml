@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Run Cargo Audit
+        uses: rustsec/audit-check@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build
+        run: cargo build --verbose
+      - name: Lint with Clippy
+        run: cargo clippy -- -D warnings
+      - name: Test
+        run: cargo test --verbose
+
+env:
+  CARGO_TERM_COLOR: always

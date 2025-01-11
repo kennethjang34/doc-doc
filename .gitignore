@@ -1,0 +1,15 @@
+debug/
+target/
+dist/
+out/
+**/*.rs.bk
+**/*.rs.pending-snap
+*.log
+
+.env
+.envrc
+
+
+.DS_Store
+.vim
+.vscode/settings.json
